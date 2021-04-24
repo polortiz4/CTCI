@@ -9,6 +9,7 @@ pub struct Node<T: Ord> {
 }
 
 impl<T: Ord> Node<T> {
+  /// Takes a node to add to the tree. It adds the node by value (copies it)
   pub fn add_node(&mut self, node: Node<T>) {
     if self.data < node.data {
       match &mut self.right_child {
