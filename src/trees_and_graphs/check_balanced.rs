@@ -21,7 +21,9 @@ use std::cmp;
 pub fn check_balanced<T: Ord>(root: &Node<T>) -> bool {
   check_balanced_helper(root).is_some()
 }
-
+fn abs_diff(a: usize, b: usize) -> usize {
+  (a as isize - b as isize).unsigned_abs()
+}
 // This function takes in a node and returns its height if balanced, or None if unbalanced
 fn check_balanced_helper<T: Ord>(root: &Node<T>) -> Option<usize> {
   match (&root.left_child, &root.right_child) {
@@ -32,7 +34,7 @@ fn check_balanced_helper<T: Ord>(root: &Node<T>) -> Option<usize> {
       let r_height = check_balanced_helper(&r_child)?;
 
       // Both children are balanced
-      if l_height <= r_height + 1 && r_height <= l_height + 1 {
+      if abs_diff(l_height, r_height) <= 1 {
         // Children are of similar height
         Some(cmp::max(l_height, r_height) + 1)
       } else {
