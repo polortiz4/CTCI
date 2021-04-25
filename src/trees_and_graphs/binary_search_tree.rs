@@ -1,31 +1,35 @@
 use std::cmp::Ord;
 
+pub type Tree<T> = Option<Box<Node<T>>>;
 // Implementation of a binary search tree
 #[derive(Debug, Clone)]
 pub struct Node<T> {
   pub data: T,
-  pub right_child: Option<Box<Node<T>>>,
-  pub left_child: Option<Box<Node<T>>>,
+  pub right_child: Tree<T>,
+  pub left_child: Tree<T>,
 }
 
 impl<T: Ord> Node<T> {
   /// Takes a node to add to the tree. It adds the node by value (copies it)
   pub fn add_node(&mut self, node: Node<T>) {
-    if self.data < node.data {
+    self.add_new_node(node.data)
+  }
+  pub fn add_new_node(&mut self, node_data: T) {
+    if self.data < node_data {
       match &mut self.right_child {
-        Some(r_child) => r_child.add_node(node),
-        None => self.right_child = Some(Box::new(Node::new(node.data))),
+        Some(r_child) => r_child.add_new_node(node_data),
+        None => self.right_child = Some(Box::new(Node::new(node_data))),
       }
     } else {
       match &mut self.left_child {
-        Some(l_child) => l_child.add_node(node),
-        None => self.left_child = Some(Box::new(Node::new(node.data))),
+        Some(l_child) => l_child.add_new_node(node_data),
+        None => self.left_child = Some(Box::new(Node::new(node_data))),
       }
     }
   }
 
-  pub fn new(data: T) -> Self{
-    Node{
+  pub fn new(data: T) -> Self {
+    Node {
       data,
       right_child: None,
       left_child: None,
@@ -50,9 +54,28 @@ mod test {
     root.add_node(ll_grandchild);
 
     assert_eq!(root.right_child.as_ref().unwrap().data, 5);
-    assert_eq!(root.left_child.as_ref().unwrap().left_child.as_ref().unwrap().data, 1);
-    assert_eq!(root.left_child.as_ref().unwrap().right_child.as_ref().unwrap().data, 3);
+    assert_eq!(
+      root
+        .left_child
+        .as_ref()
+        .unwrap()
+        .left_child
+        .as_ref()
+        .unwrap()
+        .data,
+      1
+    );
+    assert_eq!(
+      root
+        .left_child
+        .as_ref()
+        .unwrap()
+        .right_child
+        .as_ref()
+        .unwrap()
+        .data,
+      3
+    );
     assert_eq!(root.left_child.as_ref().unwrap().data, 2);
   }
 }
-
