@@ -1,8 +1,8 @@
 use std::cmp::Ord;
 
 // Implementation of a binary search tree
-#[derive(Debug)]
-pub struct Node<T: Ord> {
+#[derive(Debug, Clone)]
+pub struct Node<T> {
   pub data: T,
   pub right_child: Option<Box<Node<T>>>,
   pub left_child: Option<Box<Node<T>>>,
