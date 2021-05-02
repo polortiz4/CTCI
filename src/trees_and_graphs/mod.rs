@@ -8,7 +8,11 @@ pub mod binary_search_tree;
 pub mod first_common_ancestor;
 pub mod build_order;
 pub mod double_linked_bst;
-pub mod graph;
 pub mod route_between_nodes;
 pub mod successor;
+pub mod bst_sequence;
+
+
+pub mod vector_tree;
 pub mod vector_bst;
+pub mod graph;

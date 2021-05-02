@@ -135,6 +135,11 @@ pub struct DoubleLinkedBST<T> {
     nodes: Vec<Node<T>>,
 }
 
+impl<T: PartialEq + Copy> DoubleLinkedBST<T>{
+    pub fn find_idx(&self, data: T) -> Option<NodeId> {
+        self.nodes.iter().position(|&r| r.data == data)
+    }
+}
 impl<T: Ord> DoubleLinkedBST<T> {
     pub fn add_new_node(&mut self, data: T) -> NodeId {
         match self.nodes.get_mut(0) {
@@ -143,6 +148,19 @@ impl<T: Ord> DoubleLinkedBST<T> {
                 let new_node = Node::new(data, 0, self);
                 self.push_node(new_node)
             }
+        }
+    }
+
+    pub fn find(&self, data: T) -> Option<&Node<T>> {
+        self.find_helper(data, self.nodes.get(0)?)
+    }
+    fn find_helper<'a>(&self, data: T, curr: &'a Node<T>) -> Option<&'a Node<T>> {
+        if curr.data == data {
+            return Some(curr);
+        } else if curr.data < data {
+            self.find_helper(data, curr.get_left_child()?)
+        } else {
+            self.find_helper(data, curr.get_right_child()?)
         }
     }
 }
