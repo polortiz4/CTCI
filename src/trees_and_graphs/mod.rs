@@ -12,6 +12,7 @@ pub mod route_between_nodes;
 pub mod successor;
 pub mod bst_sequence;
 pub mod check_subtree;
+pub mod paths_with_sum;
 
 pub mod vector_tree;
 pub mod vector_bst;
