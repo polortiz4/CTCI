@@ -37,6 +37,7 @@ impl<T: Ord> Node<T> {
   }
 }
 
+#[cfg(test)]
 mod test {
   #[test]
   fn can_add_nodes() {
