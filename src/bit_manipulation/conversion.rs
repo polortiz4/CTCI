@@ -7,6 +7,7 @@
 /// use ctci::bit_manipulation::conversion::conversion;
 ///
 /// assert_eq!(4, conversion(10, 5));  // 1010 vs 0101
+/// assert_eq!(3, conversion(11, 5));  // 1011 vs 0101
 /// ```
 pub fn conversion(i1: i32, i2: i32) -> u32 {
     let diff = i1 ^ i2;
@@ -35,5 +36,12 @@ mod test {
         assert_eq!(1, conversion(3, 2));
         assert_eq!(0, conversion(0, 0));
         assert_eq!(2, conversion(29, 15));
+    }
+
+    #[test]
+    fn test_bit(){
+        let a = 0b001;
+        let b = 0b010;
+        assert_eq!(a, (b >> 1));
     }
 }
