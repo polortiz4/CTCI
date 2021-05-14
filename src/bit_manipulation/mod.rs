@@ -4,5 +4,6 @@ pub mod insertion;
 pub mod binary_to_string;
 pub mod flip_bit_to_win;
 pub mod next_number;
+pub mod debugger;
 
 pub mod shared;
