@@ -9,10 +9,10 @@
 /// let a = 10;  // 1010
 /// assert_eq!(Some((9, 12)), next_number(a));
 /// ```
-pub fn next_number(input: u32) -> Option<(u32, u32)> {
-    let next_small = flip_first_zero_forward(input)?;
-    let next_large = flip_first_one_forward(input)?;
-    Some((next_small, next_large))
+pub fn next_number(input: u32) -> (Option<u32>, Option<u32>) {
+    let next_small = flip_first_zero_forward(input);
+    let next_large = flip_first_one_forward(input);
+    (next_small, next_large)
 }
 
 fn flip_first_one_forward(input: u32) -> Option<u32> {
@@ -92,8 +92,8 @@ mod test{
         let a = 10;  // 1010
         let b = 0;  // 0
         let c = 7;  // 111
-        assert_eq!(Some((9, 12)), next_number(a));
-        assert_eq!(None, next_number(b));
-        assert_eq!(None, next_number(c));
+        assert_eq!((Some(9), Some(12)), next_number(a));
+        assert_eq!((None, None), next_number(b));
+        assert_eq!((None, Some(14)), next_number(c));
     }
 }
