@@ -7,5 +7,6 @@ pub mod next_number;
 pub mod debugger;
 pub mod conversion;
 pub mod pairwise_swap;
+pub mod draw_line;
 
 pub mod shared;
