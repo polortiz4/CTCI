@@ -1,9 +1,0 @@
-.git
-.gitignore[file]
-.vscode
-Cargo.lock[file]
-Cargo.toml[file]
-file_list.txt[file]
-README.md[file]
-src
-target
